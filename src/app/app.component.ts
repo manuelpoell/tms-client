@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `<h1>Hello World!</h1>`,
 })
-export class AppComponent {
-  title = 'tms-client';
-}
+export class AppComponent {}
