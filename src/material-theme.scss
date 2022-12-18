@@ -1,0 +1,32 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$tms-light-primary: mat.define-palette(mat.$deep-purple-palette);
+$tms-light-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+
+$tms-dark-primary: mat.define-palette(mat.$purple-palette);
+$tms-dark-accent: mat.define-palette(mat.$green-palette, A200, A100, A400);
+
+$tms-warn: mat.define-palette(mat.$red-palette);
+
+$tms-light-theme: mat.define-light-theme((
+  color: (
+    primary: $tms-light-primary,
+    accent: $tms-light-accent,
+    warn: $tms-warn,
+  )
+));
+
+$tms-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $tms-dark-primary,
+    accent: $tms-dark-accent,
+    warn: $tms-warn,
+  )
+));
+
+@include mat.all-component-themes($tms-light-theme);
+
+.dark {
+  @include mat.all-component-colors($tms-dark-theme);
+}

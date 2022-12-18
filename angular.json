@@ -50,7 +50,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/custom-theme.scss",
+              "src/material-theme.scss",
               "src/styles.css"
             ],
             "scripts": []
