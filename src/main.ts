@@ -9,15 +9,16 @@ import { provideEffects } from '@ngrx/effects';
 import { metaReducers } from './app/meta.reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { environment } from './environments/environment';
-import { AuthGuard } from './app/auth/auth.guard';
+import { AuthGuard } from './app/auth/guards/auth.guard';
 import { AuthEffects } from './app/auth/store/auth.effects';
 import { authFeature } from './app/auth/store/auth.reducer';
 import { AuthTokenInterceptor } from './app/auth/interceptors/auth-token.interceptor';
 import { RefreshTokensInterceptor } from './app/auth/interceptors/refresh-tokens.interceptor';
+import { IsLoggedInGuard } from './app/auth/guards/is-logged-in.guard';
 
 export const ROUTES: Array<Route> = [
 	{ path: 'app', loadChildren: () => import('./app/layout/routes'), canActivate: [AuthGuard] },
-	{ path: 'auth', loadChildren: () => import('./app/auth/routes') },
+	{ path: 'auth', loadChildren: () => import('./app/auth/routes'), canActivate: [IsLoggedInGuard] },
 	{ path: '**', redirectTo: 'auth' }
 ];
 
