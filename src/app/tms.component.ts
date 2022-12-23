@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { initTheme } from './layout/store/layout.actions';
 
 @Component({
   imports: [RouterModule],
@@ -9,10 +11,11 @@ import { RouterModule } from '@angular/router';
   template: `<router-outlet></router-outlet>`,
 })
 export class TMSComponent implements OnInit {
+  constructor(
+    private store: Store,
+  ) {}
+
   ngOnInit() {
-    // detect preferring dark mode
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      document.body.classList.add('dark');
-    }
+    this.store.dispatch(initTheme());
   }
 }

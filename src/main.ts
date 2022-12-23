@@ -15,6 +15,8 @@ import { authFeature } from './app/auth/store/auth.reducer';
 import { AuthTokenInterceptor } from './app/auth/interceptors/auth-token.interceptor';
 import { RefreshTokensInterceptor } from './app/auth/interceptors/refresh-tokens.interceptor';
 import { IsLoggedInGuard } from './app/auth/guards/is-logged-in.guard';
+import { LayoutEffects } from './app/layout/store/layout.effects';
+import { layoutFeature } from './app/layout/store/layout.reducer';
 
 export const ROUTES: Array<Route> = [
 	{ path: 'app', loadChildren: () => import('./app/layout/routes'), canActivate: [AuthGuard] },
@@ -39,7 +41,8 @@ bootstrapApplication(TMSComponent, {
 			autoPause: true,
 			trace: false
 		}),
-		provideEffects([AuthEffects]),
-		provideState(authFeature)
+		provideEffects([AuthEffects, LayoutEffects]),
+		provideState(authFeature),
+		provideState(layoutFeature),
 	]	
 });

@@ -1,1 +1,25 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <span>TMS</span>
+  <button mat-icon-button (click)="toggleTheme()">
+    <mat-icon>{{ (currentTheme$ | async) === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-drawer-container>
+  <mat-drawer mode="side" opened>
+    <div class="sidemenu">
+      <div class="sidemenu-top">
+        <button mat-icon-button matTooltip="Start" matTooltipPosition="right" (click)="home()">
+          <mat-icon>home</mat-icon>
+        </button>
+      </div>
+      <div class="sidemenu-bottom">
+        <button mat-icon-button matTooltip="Abmelden" matTooltipPosition="right" (click)="logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
