@@ -17,6 +17,8 @@ import { RefreshTokensInterceptor } from './app/auth/interceptors/refresh-tokens
 import { IsLoggedInGuard } from './app/auth/guards/is-logged-in.guard';
 import { LayoutEffects } from './app/layout/store/layout.effects';
 import { layoutFeature } from './app/layout/store/layout.reducer';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const ROUTES: Array<Route> = [
 	{ path: 'app', loadChildren: () => import('./app/layout/routes'), canActivate: [AuthGuard] },
@@ -27,6 +29,8 @@ export const ROUTES: Array<Route> = [
 bootstrapApplication(TMSComponent, {
 	providers: [
 		importProvidersFrom(BrowserAnimationsModule),
+		importProvidersFrom(MatSnackBarModule),
+		importProvidersFrom(MatDialogModule),
 		provideRouter(ROUTES),
 		provideHttpClient(
 			withInterceptors([

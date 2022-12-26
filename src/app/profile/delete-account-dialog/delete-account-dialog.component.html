@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Account löschen?</h1>
+<mat-dialog-content>
+  <p>Gib Dein Passwort an, um Deinen Account permanent zu löschen:</p>
+  <mat-form-field appearance="outline">
+    <mat-label>Passwort</mat-label>
+    <input matInput [formControl]="password">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button mat-dialog-close>Abbrechen</button>
+  <button mat-flat-button color="warn" [mat-dialog-close]="{ password: password.getRawValue() }" [disabled]="password.invalid">Löschen</button>
+</mat-dialog-actions>

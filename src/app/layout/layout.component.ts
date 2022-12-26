@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 import { Store } from '@ngrx/store';
 import { logout } from '../auth/store/auth.actions';
 import { selectTheme } from './store/layout.selectors';
@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule,
+    MatListModule,
   ],
   standalone: true,
   selector: 'tms-layout',
@@ -33,7 +33,6 @@ export class LayoutComponent {
 
   constructor(
     private store: Store,
-    private router: Router,
   ) {}
 
   toggleTheme(): void {
@@ -42,10 +41,6 @@ export class LayoutComponent {
         ? lightTheme()
         : darkTheme()
     );
-  }
-
-  home(): void {
-    this.router.navigate(['app']);
   }
 
   logout(): void {

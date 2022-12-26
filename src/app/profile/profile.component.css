@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+mat-card, .footer-actions {
+  width: 90%;
+  max-width: 800px;
+  min-width: 400px;
+}
+
+mat-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.profile-row {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  align-items: center;
+}

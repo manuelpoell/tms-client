@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
@@ -36,6 +37,13 @@ export class AuthEffects {
     );
   }, { dispatch: false });
 
+  $loginFailure = createEffect(() => {
+    return this.$actions.pipe(
+      ofType(loginFailure),
+      tap(() => this._snackbar.open('Ungültige Login Daten', undefined, { duration: 5000, horizontalPosition: 'right', panelClass: ['snackbar-error'] }))
+    );
+  }, { dispatch: false });
+
   $updateTokens = createEffect(() => {
     return this.$actions.pipe(
       ofType(udpateTokens),
@@ -69,6 +77,7 @@ export class AuthEffects {
   constructor(
     private $actions: Actions,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private _snackbar: MatSnackBar,
   ) {}
 }
