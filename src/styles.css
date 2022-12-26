@@ -4,13 +4,15 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .snackbar-success {
-  color: white !important;
-  background: green !important;
+  --mdc-snackbar-container-color: green !important;
 }
 
 .snackbar-error {
+  --mdc-snackbar-container-color: red !important;
+}
+
+.snackbar-success .mat-mdc-snack-bar-label, .snackbar-error .mat-mdc-snack-bar-label {
   color: white !important;
-  background: red !important;
 }
 
 mat-form-field {
