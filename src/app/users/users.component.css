@@ -1,0 +1,26 @@
+mat-card {
+  margin-bottom: 16px;
+}
+
+.users-container {
+  height: 60%;
+  overflow: auto;
+}
+
+.user-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-line > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.add-user-button {
+  position: absolute;
+  bottom: 160px;
+  right: 32px;
+}

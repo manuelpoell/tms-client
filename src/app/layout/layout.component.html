@@ -4,7 +4,7 @@
     <mat-icon>{{ (currentTheme$ | async) === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
   </button>
 </mat-toolbar>
-<mat-sidenav-container>
+<mat-sidenav-container *ngrxLet="userRole$ as userRole">
   <mat-sidenav mode="side" opened>
     <div class="sidemenu">
       <div>
@@ -15,9 +15,14 @@
             <div matListItemTitle>Dashboard</div>
           </mat-list-item>
 
+          <mat-list-item *ngIf="userRole === 'ADMIN'" [routerLink]="['users']" routerLinkActive="active">
+            <mat-icon matListItemIcon>group</mat-icon>
+            <div matListItemTitle>Benutzer</div>
+          </mat-list-item>
+
           <mat-list-item [routerLink]="['profile']" routerLinkActive="active">
-            <mat-icon matListItemIcon>person</mat-icon>
-            <div matListItemTitle>Profil</div>
+            <mat-icon matListItemIcon>settings</mat-icon>
+            <div matListItemTitle>Einstellungen</div>
           </mat-list-item>
 
         </mat-nav-list>

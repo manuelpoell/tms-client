@@ -1,0 +1,42 @@
+<h1 matDialogTitle>Neuer Benutzer</h1>
+<mat-dialog-content>
+  <form [formGroup]="userForm" (ngSubmit)="add()">
+
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Vorname</mat-label>
+        <input matInput formControlName="firstName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nachname</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>E-Mail</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Passwort</mat-label>
+      <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+      <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Rolle</mat-label>
+      <mat-select formControlName="role">
+        <mat-option *ngFor="let role of userRoles" [value]="role.value">{{ role.displayText }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button mat-dialog-close>Abbrechen</button>
+  <button mat-flat-button color="primary" [disabled]="userForm.invalid" (click)="add()">Hinzufügen</button>
+</mat-dialog-actions>

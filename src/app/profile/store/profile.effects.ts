@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { ProfileService } from '../profile.service';
-import { changeUserPassword, changeUserPasswordCancelled, changeUserPasswordSuccess, deleteProfile, deleteProfileCancelled, failedProfileAction, loadProfile, openChangePasswordDialog, openDeleteProfileDialog, setProfile, updateProfile } from './profile.actions';
+import { changeUserPassword, changeUserPasswordSuccess, deleteProfile, failedProfileAction, loadProfile, openChangePasswordDialog, openDeleteProfileDialog, setProfile, updateProfile } from './profile.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { logout } from 'src/app/auth/store/auth.actions';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteAccountDialogComponent } from '../delete-account-dialog/delete-account-dialog.component';
 import { ChangePasswordDialogComponent } from '../change-password-dialog/change-password-dialog.component';
-import { Action } from '@ngrx/store';
 
 @Injectable()
-export class ProfileEffects implements OnInitEffects {
+export class ProfileEffects {
 
   $loadProfile = createEffect(() => {
     return this.actions$.pipe(
@@ -40,15 +39,9 @@ export class ProfileEffects implements OnInitEffects {
   $openChangePasswordDialog = createEffect(() => {
     return this.actions$.pipe(
       ofType(openChangePasswordDialog),
-      switchMap(() => this._dialog.open(ChangePasswordDialogComponent).afterClosed().pipe(
-        map(({ password, newPassword }) => {
-          if (password && newPassword) return changeUserPassword({ password, newPassword });
-          return changeUserPasswordCancelled();
-        }),
-        catchError(() => of(changeUserPasswordCancelled()))
-      ))
+      tap(() => this._dialog.open(ChangePasswordDialogComponent))
     );
-  });
+  }, { dispatch: false });
 
   $changeUserPassword = createEffect(() => {
     return this.actions$.pipe(
@@ -72,15 +65,9 @@ export class ProfileEffects implements OnInitEffects {
   $openDeleteProfileDialog = createEffect(() => {
     return this.actions$.pipe(
       ofType(openDeleteProfileDialog),
-      switchMap(() => this._dialog.open(DeleteAccountDialogComponent).afterClosed().pipe(
-        map(({ password }) => {
-          if (password) return deleteProfile({ password });
-          return deleteProfileCancelled();
-        }),
-        catchError(() => of(deleteProfileCancelled()))
-      ))
+      tap(() => this._dialog.open(DeleteAccountDialogComponent))
     );
-  });
+  }, { dispatch: false });
 
   $deleteProfile = createEffect(() => {
     return this.actions$.pipe(
@@ -109,8 +96,4 @@ export class ProfileEffects implements OnInitEffects {
     private _snackbar: MatSnackBar,
     private _dialog: MatDialog,
   ) {}
-
-  ngrxOnInitEffects(): Action {
-    return loadProfile();
-  }
 }
